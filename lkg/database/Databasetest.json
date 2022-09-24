@@ -1,0 +1,25 @@
+{
+	"name": "Databasetest",
+	"properties": {
+		"Name": "Databasetest",
+		"EntityType": "DATABASE",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"Properties": {
+			"IsSyMSCDMDatabase": true
+		},
+		"Source": {
+			"Provider": "ADLS",
+			"Location": "abfss://filefrom@12345nrtutest.dfs.core.windows.net/synapse",
+			"Properties": {
+				"FormatType": "csv",
+				"LinkedServiceName": "nrtu-test-synape-2-WorkspaceDefaultStorage"
+			}
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 1,
+		"ObjectId": "f8663ca0-29d0-4402-a5cb-55b0067ccea1"
+	},
+	"type": "DATABASE"
+}

@@ -1,0 +1,138 @@
+{
+	"name": "Notebook 5",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "tmp",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"runAsWorkspaceSystemIdentity": false,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "e31e67d6-e202-4d5a-bc18-2a8ff8d6fa56"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/ad1ca85f-99fd-4bfc-838b-9466bfcbebee/resourceGroups/NRTU_TEST/providers/Microsoft.Synapse/workspaces/nrtu-test-synape-2/bigDataPools/tmp",
+				"name": "tmp",
+				"type": "Spark",
+				"endpoint": "https://nrtu-test-synape-2.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/tmp",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net",
+					"authHeader": null
+				},
+				"sparkVersion": "3.1",
+				"nodeCount": 3,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"sprakDF2021 = spark.createDataFrame([\\\r\n",
+					"    {'name': 'Jack ', 'pasport': '10001', 'age': 21},\\\r\n",
+					"    {'name': 'Rose', 'pasport': '10002  ', 'age': 21},\\\r\n",
+					"    {'name': 'Joan', 'pasport': '10003', 'age': 21},\\\r\n",
+					"    {'name': 'Tom', 'pasport': '10004', 'age': 21},\\\r\n",
+					"    {'name': 'Van', 'pasport': '10005', 'age': 21},\\\r\n",
+					"    {'name': 'Kelly', 'pasport': '10006', 'age': 21}], \"name string, pasport string, age int\")"
+				],
+				"attachments": null,
+				"execution_count": 2
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"sprakDF2022 = spark.createDataFrame([\\\r\n",
+					"    {'name': 'new ', 'pasport': '22001', 'age': 22},\\\r\n",
+					"    {'name': 'Jack', 'pasport': '10002  ', 'age': 22},\\\r\n",
+					"    {'name': 'Rose', 'pasport': '10003', 'age': 22}], \"name string, pasport string, age int\")"
+				],
+				"attachments": null,
+				"execution_count": 7
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"sprakDF2022_new = sprakDF2022.join(sprakDF2021, 'pasport', 'left_anti').select('*')\r\n",
+					"sprakDF2022_new.show()\r\n",
+					"sprakDF_all = sprakDF2021.unionAll(sprakDF2022_new)\r\n",
+					"sprakDF_all.show()"
+				],
+				"attachments": null,
+				"execution_count": 11
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"sprakDF2021_fixed = sprakDF2021.join(sprakDF2022, 'pasport', 'left_anti').select('*')\r\n",
+					"sprakDF2021_fixed.show()\r\n",
+					"sprakDF_all = sprakDF2022.unionAll(sprakDF2021_fixed)\r\n",
+					"sprakDF_all.show()"
+				],
+				"attachments": null,
+				"execution_count": 12
+			}
+		]
+	}
+}

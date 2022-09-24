@@ -1,0 +1,283 @@
+{
+	"name": "sparksession_log",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "tmp",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"runAsWorkspaceSystemIdentity": false,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "7831b978-618d-494e-ae22-d53d7e02cecd"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/ad1ca85f-99fd-4bfc-838b-9466bfcbebee/resourceGroups/NRTU_TEST/providers/Microsoft.Synapse/workspaces/nrtu-test-synape-2/bigDataPools/tmp",
+				"name": "tmp",
+				"type": "Spark",
+				"endpoint": "https://nrtu-test-synape-2.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/tmp",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net",
+					"authHeader": null
+				},
+				"sparkVersion": "3.1",
+				"nodeCount": 3,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"from_container=\"filefrom\"\r\n",
+					"from_account=\"12345nrtutest\"\r\n",
+					"filename=\"temp3.csv\"\r\n",
+					"\r\n",
+					"target_container=\"filefrom\"\r\n",
+					"target_account=\"12345nrtutest\"\r\n",
+					"target_linkservice=\"temp_output.csv\""
+				],
+				"attachments": null,
+				"execution_count": 3
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"microsoft": {
+						"language": "python"
+					}
+				},
+				"source": [
+					"%%pyspark\r\n",
+					"\r\n",
+					"# ADLS2のコンテナーとアカウントを設定する\r\n",
+					"account_name = from_account\r\n",
+					"container_name = from_container\r\n",
+					"adls_path = 'abfss://%s@%s.dfs.core.windows.net/' % (container_name, account_name)\r\n",
+					"from_path = adls_path + filename\r\n",
+					"\r\n",
+					"# ADLS2中のファイルを読み込んで、dataframeに格納する\r\n",
+					"df = spark.read.load(from_path, format='csv',header='true' ) \r\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": 4
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"from pyspark.sql.functions import *\r\n",
+					"\r\n",
+					"#列を追加して、“XXXX”を設定する\r\n",
+					"df = df.withColumn(\"addcolumn\",lit(\"XXXX\"))\r\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"import pandas\r\n",
+					"\r\n",
+					"df_csv=df.toPandas()"
+				],
+				"attachments": null,
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"from pyspark.sql import SparkSession\r\n",
+					"\r\n",
+					"sc = SparkSession.builder.getOrCreate()\r\n",
+					"token_library = sc._jvm.com.microsoft.azure.synapse.tokenlibrary.TokenLibrary\r\n",
+					"blob_sas_token = token_library.getConnectionString(from_linkservice)\r\n",
+					"    \r\n",
+					"target_path='abfss://%s@%s.blob.core.windows.net/%s' % (target_container, target_account, filename)\r\n",
+					"\r\n",
+					"spark.conf.set(target_path,blob_sas_token)\r\n",
+					"\r\n",
+					"# データをファイルに書いて、時間を計算する\r\n",
+					"df_csv.to_csv(target_path,storage_options = {'linked_service':target_linkservice } ,index=False)"
+				],
+				"attachments": null,
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# -*- coding: UTF-8 -*-\r\n",
+					"# =================================\r\n",
+					"#  プログラム名: ログ用定数\r\n",
+					"#  プログラムID：src_logger.py\r\n",
+					"#  処理概要    ：機械学習ログ用定数管理ファイル\r\n",
+					"# =================================\r\n",
+					"import logging\r\n",
+					"import logging.handlers\r\n",
+					"from logging import StreamHandler\r\n",
+					"\r\n",
+					"# ================================\r\n",
+					"#　logging用定数\r\n",
+					"# ================================\r\n",
+					"# プログラム名\r\n",
+					"PG_NAME = \"PG_NAME\"\r\n",
+					"\r\n",
+					"\r\n",
+					"# ================================\r\n",
+					"#　loggerの準備\r\n",
+					"# ================================\r\n",
+					"# Log記録用関数\r\n",
+					"def getLogger(pgname):\r\n",
+					"    # 全てのログを扱うストリームハンドラを生成\r\n",
+					"    sh = StreamHandler()\r\n",
+					"    fmt = \"%(asctime)s - %(filename)s:%(lineno)s - %(message)s\"\r\n",
+					"    formatter = logging.Formatter(fmt)\r\n",
+					"    for handler in logging.getLogger().handlers:\r\n",
+					"        handler.setFormatter(formatter)\r\n",
+					"    logger = logging.getLogger(pgname)\r\n",
+					"\r\n",
+					"    logger.addHandler(sh)\r\n",
+					"    logger.addHandler(handler)\r\n",
+					"    logger.setLevel(logging.DEBUG)\r\n",
+					"    return logger\r\n",
+					"\r\n",
+					"\r\n",
+					"# Log出力用オブジェクト\r\n",
+					"logger = getLogger(PG_NAME)\r\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"try:\r\n",
+					"    a=1\r\n",
+					"    b='a'\r\n",
+					"    c=a+b\r\n",
+					"except Exception:\r\n",
+					"    logger.exception(\"Exception\")"
+				],
+				"attachments": null,
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"try:\r\n",
+					"    target_path='abfss://%s@%s.blob.core.windows.net/%s' % (target_container, target_account, filename)\r\n",
+					"    # データをファイルに書いて、時間を計算する\r\n",
+					"    df_csv.to_csv(target_path,storage_options = {'linked_service':target_linkservice } ,index=False)\r\n",
+					"except Exception:\r\n",
+					"    logger.exception(\"Exception\")"
+				],
+				"attachments": null,
+				"execution_count": null
+			}
+		]
+	}
+}

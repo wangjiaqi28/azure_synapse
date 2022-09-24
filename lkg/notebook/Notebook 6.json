@@ -1,0 +1,195 @@
+{
+	"name": "Notebook 6",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "tmp",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 1,
+			"runAsWorkspaceSystemIdentity": false,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "true",
+				"spark.dynamicAllocation.minExecutors": "1",
+				"spark.dynamicAllocation.maxExecutors": "1",
+				"spark.autotune.trackingId": "0a6eb8e1-2f31-40a2-8005-2a764a82d4a2"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/ad1ca85f-99fd-4bfc-838b-9466bfcbebee/resourceGroups/NRTU_TEST/providers/Microsoft.Synapse/workspaces/nrtu-test-synape-2/bigDataPools/tmp",
+				"name": "tmp",
+				"type": "Spark",
+				"endpoint": "https://nrtu-test-synape-2.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/tmp",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net",
+					"authHeader": null
+				},
+				"sparkVersion": "3.1",
+				"nodeCount": 3,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"from common_fun.enums import TransformType\r\n",
+					"from common_fun.transform import transform_columns\r\n",
+					"from common_fun.params import HashingParameters, Conversions, Conversion\r\n",
+					"from pyspark.sql import SparkSession\r\n",
+					"from pyspark.sql.functions import udf, trim, col\r\n",
+					"from pyspark.sql.types import StringType\r\n",
+					"\r\n",
+					"\r\n",
+					"sprakDF = spark.createDataFrame([\\\r\n",
+					"    {'name': ' Jack ', 'pasport': '  10001     ', 'age': 18},\\\r\n",
+					"    {'name': 'Rose', 'pasport': '10002  ', 'age': 17},\\\r\n",
+					"    {'name': 'Joan', 'pasport': '10003', 'age': 17},\\\r\n",
+					"    {'name': 'Tom', 'pasport': '10004', 'age': 28},\\\r\n",
+					"    {'name': 'Van', 'pasport': '10005', 'age': 12},\\\r\n",
+					"    {'name': 'Kelly', 'pasport': '10006', 'age': 19}], \"name string, pasport string, age int\")\r\n",
+					"\r\n",
+					"\r\n",
+					"\r\n",
+					"\r\n",
+					"sprakDF = transform_columns(sprakDF, [Conversions('age', 'age_gen', [Conversion(TransformType.AGE_GEN, None, True)])])\r\n",
+					"\r\n",
+					"# hash_Parameter = HashingParameters('salt',  1,'salt',  9)\r\n",
+					"# transform_columns(sprakDF, [Conversions('column', 'new_column', [Conversion(TransformType.PARSE_BOOL, None, True)])]);\r\n",
+					"# transform_columns(sprakDF, [Conversions('column', 'new_column', [Conversion(TransformType.PARSE_DECIMAL, DecimalParameters(12, 5), True)])]);\r\n",
+					"# transform_columns(sprakDF, [Conversions('column', 'new_column', [Conversion(TransformType.PARSE_INT, None, True)])])\r\n",
+					"# transform_columns(sprakDF, [Conversions('column', 'new_column', [Conversion(TransformType.PARSE_LONG, None, True)])])\r\n",
+					"# transform_columns(sprakDF, [Conversions('column', 'new_column', [Conversion(TransformType.TRIM, None, True)])])\r\n",
+					"# transform_columns(sprakDF, [Conversions('column', 'new_column', [Conversion(TransformType.LPAD_ZERO, 10, True)])])\r\n",
+					"# transform_columns(sprakDF, [Conversions('column', 'new_column', [Conversion(TransformType.PARSE_DATE, 'yyyyMMdd', True)])])\r\n",
+					"# transform_columns(sprakDF, [Conversions('column', 'new_column', [Conversion(TransformType.PARSE_TIMESTAMP, 'yyyy-MM-dd HH:mm:ss', True)])])\r\n",
+					"# transform_columns(sprakDF, [Conversions('column', 'new_column', [Conversion(TransformType.NANVL, NanvlParameters(0, IntegerType), True)])])\r\n",
+					"\r\n",
+					"sprakDF.show()"
+				],
+				"attachments": null,
+				"execution_count": 5
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"'''\r\n",
+					"フォーマット化処理\r\n",
+					"'''\r\n",
+					"from typing import List\r\n",
+					"from common_fun.enums import TransformType\r\n",
+					"from common.functions import udf_nanvl, udf_parse_bool, udf_parse_decimal, udf_parse_int, udf_parse_long, udf_hash\r\n",
+					"from common_fun.params import Conversions\r\n",
+					"from pyspark.sql.dataframe import DataFrame\r\n",
+					"from pyspark.sql.functions import trim, col, lpad, to_date, to_timestamp\r\n",
+					"\r\n",
+					"\r\n",
+					"def transform_columns(df: DataFrame, transform_columns: List[Conversions]) -> DataFrame:\r\n",
+					"    \"\"\"\r\n",
+					"    データフレームの指定の列をフォーマット化します。\r\n",
+					"    \"\"\"\r\n",
+					"    selectCols = ['*']\r\n",
+					"\r\n",
+					"    for tCol in transform_columns:\r\n",
+					"        conversion_chain = col(tCol.colName)\r\n",
+					"        for f in tCol.funcs:\r\n",
+					"            # flageがtrueの場合、formatを実行する\r\n",
+					"            if f.enable:\r\n",
+					"                # 2）スペーストリム（スペースを削除する）\r\n",
+					"                if f.func == TransformType.TRIM:\r\n",
+					"                    conversion_chain = trim(conversion_chain)\r\n",
+					"                # IDの桁数に合わせたゼロパディング\r\n",
+					"                if f.func == TransformType.LPAD_ZERO:\r\n",
+					"                    conversion_chain = lpad(conversion_chain, f.parameter, '0')\r\n",
+					"                # 日付フォーマット　20220818 yyyymmdd \r\n",
+					"                if f.func == TransformType.PARSE_DATE:\r\n",
+					"                    conversion_chain = to_date(conversion_chain, f.parameter)\r\n",
+					"                # 日付フォーマット 20220818 145633　yyyymmdd hhMMdd \r\n",
+					"                if f.func == TransformType.PARSE_TIMESTAMP:\r\n",
+					"                    conversion_chain = to_timestamp(conversion_chain, f.parameter)\r\n",
+					"                # NULL（値を補充する）\r\n",
+					"                if f.func == TransformType.NANVL:\r\n",
+					"                    udfNanvl= udf_nanvl(f.parameter.replaceValue, f.parameter.colType, tCol.colName)\r\n",
+					"                    conversion_chain = udfNanvl(conversion_chain)\r\n",
+					"                # bool フォーマット化\r\n",
+					"                if f.func == TransformType.PARSE_BOOL:\r\n",
+					"                    udfPB= udf_parse_bool(tCol.colName)\r\n",
+					"                    conversion_chain = udfPB(conversion_chain)\r\n",
+					"                # decimal フォーマット化\r\n",
+					"                if f.func == TransformType.PARSE_DECIMAL:\r\n",
+					"                    udfPD= udf_parse_decimal(f.parameter.precision, f.parameter.scale, tCol.colName)\r\n",
+					"                    conversion_chain = udfPD(conversion_chain)\r\n",
+					"                # int フォーマット化\r\n",
+					"                if f.func == TransformType.PARSE_INT:\r\n",
+					"                    udfPI= udf_parse_int(tCol.colName)\r\n",
+					"                    conversion_chain = udfPI(conversion_chain)\r\n",
+					"                # long フォーマット化\r\n",
+					"                if f.func == TransformType.PARSE_LONG:\r\n",
+					"                    udfPL= udf_parse_long(tCol.colName)\r\n",
+					"                    conversion_chain = udfPL(conversion_chain)\r\n",
+					"                # HASH\r\n",
+					"                if f.func == TransformType.HASH:\r\n",
+					"                    udfHash = udf_hash(f.parameter, tCol.colName)\r\n",
+					"                    conversion_chain = udfHash(conversion_chain)\r\n",
+					"        # 新しい列の名前を設定する\r\n",
+					"        conversion_chain = conversion_chain.alias(tCol.asColName)\r\n",
+					"        # 検索結果に追加\r\n",
+					"        selectCols.append(conversion_chain)\r\n",
+					"    # 例:df.select('*', Column<'udf_func(trim(name, None)) AS new_name'>, Column<'trim(pasport) AS new_pasport'>)\r\n",
+					"    return df.select(selectCols)\r\n",
+					"\r\n",
+					"\r\n",
+					"'''\r\n",
+					"    差分追加\r\n",
+					"'''\r\n",
+					"def transform_merge_append(old: DataFrame, new: DataFrame, primaryKey: List[str]) -> DataFrame:\r\n",
+					"    new_add = new.join(old, primaryKey, 'left_anti').select('*')\r\n",
+					"    return old.unionAll(new_add)\r\n",
+					"\r\n",
+					"'''\r\n",
+					"    差分更新\r\n",
+					"'''\r\n",
+					"def transform_merge_overwrite(old: DataFrame, new: DataFrame, primaryKey: List[str]) -> DataFrame:\r\n",
+					"    old_base = old.join(new, primaryKey, 'left_anti').select('*')\r\n",
+					"    return old_base.unionAll(new)"
+				],
+				"attachments": null,
+				"execution_count": 4
+			}
+		]
+	}
+}

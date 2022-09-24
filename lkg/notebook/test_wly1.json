@@ -1,0 +1,105 @@
+{
+	"name": "test_wly1",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "tmp",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"runAsWorkspaceSystemIdentity": false,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "a9fa34d3-f8c6-4604-bcb6-4407d4f8038a"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/ad1ca85f-99fd-4bfc-838b-9466bfcbebee/resourceGroups/NRTU_TEST/providers/Microsoft.Synapse/workspaces/nrtu-test-synape-2/bigDataPools/tmp",
+				"name": "tmp",
+				"type": "Spark",
+				"endpoint": "https://nrtu-test-synape-2.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/tmp",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net",
+					"authHeader": null
+				},
+				"sparkVersion": "3.1",
+				"nodeCount": 3,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"from pyspark.sql import functions as F\r\n",
+					"from pyspark.sql.functions import *\r\n",
+					"\r\n",
+					"a = [{'name':'Alice','age':6},{'name':'Tom','age':7},{'name':'Jerry','age':8}]\r\n",
+					"b = [{'name':'Alice','score':85},{'name':'Tom','score':77},{'name':'Jerry','score':98}]\r\n",
+					"\r\n",
+					"df1 = spark.createDataFrame(a)\r\n",
+					"df2 = spark.createDataFrame(b)\r\n",
+					"\r\n",
+					"\r\n",
+					"#df1.agg({'age':'max'}).collect()\r\n",
+					"#df1.agg({'age':'min'}).collect()\r\n",
+					"\r\n",
+					"#df2.collect()\r\n",
+					"#df1.agg({'age':'max'}).show()\r\n",
+					"\r\n",
+					"#df1.agg(F.min(df1.age)).collect()\r\n",
+					"\r\n",
+					"df_as1 = df1.alias(\"df_alias1\")\r\n",
+					"df_as2 = df2.alias(\"df_alias2\")\r\n",
+					"\r\n",
+					"joined_df = df_as1.join(df_as2,col(\"df_alias1.name\") == col(\"df_alias2.name\"),'inner')\r\n",
+					"#joined_df.select(\"df_alias1.name\",\"df_alias2.name\",\"df_alias2.score\").sort(desc(\"df_alias1.age\")).collect()\r\n",
+					"\r\n",
+					"#joined_df.coalesce(1).rdd.getNumPartitions()\r\n",
+					"\r\n",
+					"#df1.select(df1.colRegex(\"`(age)?+.+`\")).show()\r\n",
+					"\r\n",
+					"#df2.columns\r\n",
+					"\r\n",
+					"df2.count()\r\n",
+					"#df2.createGlobalTempView(\"people\")\r\n",
+					"#df3 = spark.sql(\"select * from global_temp.people\")\r\n",
+					"\r\n",
+					"#spark.catalog.dropGlobalTempView(\"people1\")\r\n",
+					"\r\n",
+					"#sorted(df3.collect()) == sorted(df2.collect())\r\n",
+					"\r\n",
+					"df1.sort(\"age\").collect()\r\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": 47
+			}
+		]
+	}
+}

@@ -1,0 +1,719 @@
+{
+	"name": "Notebook 3",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "tmp",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"runAsWorkspaceSystemIdentity": false,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "a6fba700-3c8a-40f8-9454-ccd4a25415fc"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1",
+				"state": {
+					"d14dbed4-e441-4462-bfda-fe3738946857": {
+						"type": "Synapse.DataFrame",
+						"sync_state": {
+							"table": {
+								"rows": [
+									{
+										"0": "1",
+										"1": " A",
+										"2": "S20",
+										"3": "1",
+										"4": "1",
+										"5": "1",
+										"6": "1",
+										"7": "1",
+										"8": "1",
+										"9": "1",
+										"10": "1"
+									},
+									{
+										"0": "2",
+										"1": "B",
+										"2": "S21",
+										"3": "a",
+										"4": "a",
+										"5": "a",
+										"6": "a",
+										"7": "a",
+										"8": "a",
+										"9": "a",
+										"10": "a"
+									},
+									{
+										"0": "3",
+										"1": "C",
+										"2": "S19",
+										"3": "true",
+										"4": "true",
+										"5": "true",
+										"6": "true",
+										"7": "true",
+										"8": "true",
+										"9": "true",
+										"10": "true"
+									},
+									{
+										"0": "4",
+										"1": "D"
+									},
+									{
+										"0": "5",
+										"1": "E",
+										"2": "S15",
+										"3": "20220101",
+										"4": "20220101",
+										"5": "20220101",
+										"6": "20220101",
+										"7": "20220101",
+										"8": "20220101",
+										"9": "20220101",
+										"10": "20220101"
+									},
+									{
+										"0": "6",
+										"1": "E",
+										"2": "S15",
+										"3": "2022/01/01",
+										"4": "2022/01/01",
+										"5": "2022/01/01",
+										"6": "2022/01/01",
+										"7": "2022/01/01",
+										"8": "2022/01/01",
+										"9": "2022/01/01",
+										"10": "2022/01/01"
+									},
+									{
+										"0": "7",
+										"1": "E",
+										"2": "S15",
+										"3": "2022-01-01",
+										"4": "2022-01-01",
+										"5": "2022-01-01",
+										"6": "2022-01-01",
+										"7": "2022-01-01",
+										"8": "2022-01-01",
+										"9": "2022-01-01",
+										"10": "2022-01-01"
+									},
+									{
+										"0": "8",
+										"1": "E",
+										"2": "S15",
+										"3": "2022-1-1",
+										"4": "2022-1-1",
+										"5": "2022-1-1",
+										"6": "2022-1-1",
+										"7": "2022-1-1",
+										"8": "2022-1-1",
+										"9": "2022-1-1",
+										"10": "2022-1-1"
+									},
+									{
+										"0": "9",
+										"1": "E",
+										"2": "S15",
+										"3": "2022-01-01 01:01:01.123",
+										"4": "2022-01-01 01:01:01.123",
+										"5": "2022-01-01 01:01:01.123",
+										"6": "2022-01-01 01:01:01.123",
+										"7": "2022-01-01 01:01:01.123",
+										"8": "2022-01-01 01:01:01.123",
+										"9": "2022-01-01 01:01:01.123",
+										"10": "2022-01-01 01:01:01.123"
+									},
+									{
+										"0": "10",
+										"1": "E",
+										"2": "S15",
+										"3": "2022/01/01 01:01:01.123",
+										"4": "2022/01/01 01:01:01.123",
+										"5": "2022/01/01 01:01:01.123",
+										"6": "2022/01/01 01:01:01.123",
+										"7": "2022/01/01 01:01:01.123",
+										"8": "2022/01/01 01:01:01.123",
+										"9": "2022/01/01 01:01:01.123",
+										"10": "2022/01/01 01:01:01.123"
+									},
+									{
+										"0": "11",
+										"1": "F",
+										"2": "S15",
+										"3": "9223372036854775808",
+										"4": "9223372036854775808",
+										"5": "9223372036854775808",
+										"6": "9223372036854775808",
+										"7": "9223372036854775808",
+										"8": "9223372036854775808",
+										"9": "9223372036854775808",
+										"10": "9223372036854775808"
+									}
+								],
+								"schema": [
+									{
+										"key": "0",
+										"name": "_c0",
+										"type": "string"
+									},
+									{
+										"key": "1",
+										"name": "Name",
+										"type": "string"
+									},
+									{
+										"key": "2",
+										"name": "ID",
+										"type": "string"
+									},
+									{
+										"key": "3",
+										"name": "boolCol",
+										"type": "string"
+									},
+									{
+										"key": "4",
+										"name": "dateCol",
+										"type": "string"
+									},
+									{
+										"key": "5",
+										"name": "timestampCol",
+										"type": "string"
+									},
+									{
+										"key": "6",
+										"name": "decimalCol",
+										"type": "string"
+									},
+									{
+										"key": "7",
+										"name": "doubleCol",
+										"type": "string"
+									},
+									{
+										"key": "8",
+										"name": "floatCol",
+										"type": "string"
+									},
+									{
+										"key": "9",
+										"name": "integerCol",
+										"type": "string"
+									},
+									{
+										"key": "10",
+										"name": "longCol",
+										"type": "string"
+									}
+								],
+								"truncated": false
+							},
+							"isSummary": false,
+							"language": "scala"
+						},
+						"persist_state": {
+							"view": {
+								"type": "details",
+								"chartOptions": {
+									"chartType": "bar",
+									"aggregationType": "count",
+									"categoryFieldKeys": [
+										"0"
+									],
+									"seriesFieldKeys": [
+										"0"
+									],
+									"isStacked": false
+								}
+							}
+						}
+					},
+					"51bf500b-1fad-495d-83c5-853480bed114": {
+						"type": "Synapse.DataFrame",
+						"sync_state": {
+							"table": {
+								"rows": [
+									{
+										"0": "1",
+										"1": " A",
+										"2": "S20",
+										"4": "1970-01-02",
+										"6": "1"
+									},
+									{
+										"0": "2",
+										"1": "B",
+										"2": "S21"
+									},
+									{
+										"0": "3",
+										"1": "C",
+										"2": "S19"
+									},
+									{
+										"0": "4",
+										"1": "D"
+									},
+									{
+										"0": "5",
+										"1": "E",
+										"2": "S15",
+										"4": "+57330-10-04",
+										"6": "20220101"
+									},
+									{
+										"0": "6",
+										"1": "E",
+										"2": "S15"
+									},
+									{
+										"0": "7",
+										"1": "E",
+										"2": "S15",
+										"4": "2022-01-01",
+										"5": "2022-01-01 00:00:00"
+									},
+									{
+										"0": "8",
+										"1": "E",
+										"2": "S15",
+										"4": "2022-01-01",
+										"5": "2022-01-01 00:00:00"
+									},
+									{
+										"0": "9",
+										"1": "E",
+										"2": "S15",
+										"4": "2022-01-01",
+										"5": "2022-01-01 01:01:01.123"
+									},
+									{
+										"0": "10",
+										"1": "E",
+										"2": "S15"
+									},
+									{
+										"0": "11",
+										"1": "F",
+										"2": "S15"
+									}
+								],
+								"schema": [
+									{
+										"key": "0",
+										"name": "_c0",
+										"type": "string"
+									},
+									{
+										"key": "1",
+										"name": "Name",
+										"type": "string"
+									},
+									{
+										"key": "2",
+										"name": "ID",
+										"type": "string"
+									},
+									{
+										"key": "3",
+										"name": "boolCol",
+										"type": "boolean"
+									},
+									{
+										"key": "4",
+										"name": "dateCol",
+										"type": "date"
+									},
+									{
+										"key": "5",
+										"name": "timestampCol",
+										"type": "timestamp"
+									},
+									{
+										"key": "6",
+										"name": "decimalCol",
+										"type": "decimal"
+									},
+									{
+										"key": "7",
+										"name": "doubleCol",
+										"type": "double"
+									},
+									{
+										"key": "8",
+										"name": "floatCol",
+										"type": "float"
+									},
+									{
+										"key": "9",
+										"name": "integerCol",
+										"type": "int"
+									},
+									{
+										"key": "10",
+										"name": "longCol",
+										"type": "bigint"
+									}
+								],
+								"truncated": false
+							},
+							"isSummary": false,
+							"language": "scala"
+						},
+						"persist_state": {
+							"view": {
+								"type": "details",
+								"chartOptions": {
+									"chartType": "bar",
+									"aggregationType": "sum",
+									"categoryFieldKeys": [
+										"0"
+									],
+									"seriesFieldKeys": [
+										"6"
+									],
+									"isStacked": false
+								}
+							}
+						}
+					},
+					"d8a10f6b-fe46-4b55-becd-ee22a33ba021": {
+						"type": "Synapse.DataFrame",
+						"sync_state": {
+							"table": {
+								"rows": [
+									{
+										"0": "1",
+										"1": " A",
+										"2": "S20",
+										"3": "true",
+										"4": "2022-01-01",
+										"5": "2022-01-01 01:01:01.123",
+										"6": "1",
+										"7": "1.0",
+										"8": "1.0",
+										"9": "1",
+										"10": "1"
+									},
+									{
+										"0": "1",
+										"1": " A",
+										"2": "S20",
+										"6": "1",
+										"9": "1",
+										"10": "1"
+									}
+								],
+								"schema": [
+									{
+										"key": "0",
+										"name": "_c0",
+										"type": "int"
+									},
+									{
+										"key": "1",
+										"name": "Name",
+										"type": "string"
+									},
+									{
+										"key": "2",
+										"name": "ID",
+										"type": "string"
+									},
+									{
+										"key": "3",
+										"name": "boolCol",
+										"type": "boolean"
+									},
+									{
+										"key": "4",
+										"name": "dateCol",
+										"type": "date"
+									},
+									{
+										"key": "5",
+										"name": "timestampCol",
+										"type": "timestamp"
+									},
+									{
+										"key": "6",
+										"name": "decimalCol",
+										"type": "decimal"
+									},
+									{
+										"key": "7",
+										"name": "doubleCol",
+										"type": "double"
+									},
+									{
+										"key": "8",
+										"name": "floatCol",
+										"type": "float"
+									},
+									{
+										"key": "9",
+										"name": "integerCol",
+										"type": "int"
+									},
+									{
+										"key": "10",
+										"name": "longCol",
+										"type": "bigint"
+									}
+								],
+								"truncated": false
+							},
+							"isSummary": false,
+							"language": "scala"
+						},
+						"persist_state": {
+							"view": {
+								"type": "details",
+								"chartOptions": {
+									"chartType": "bar",
+									"aggregationType": "sum",
+									"categoryFieldKeys": [
+										"1"
+									],
+									"seriesFieldKeys": [
+										"0"
+									],
+									"isStacked": false
+								}
+							}
+						}
+					}
+				}
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/ad1ca85f-99fd-4bfc-838b-9466bfcbebee/resourceGroups/NRTU_TEST/providers/Microsoft.Synapse/workspaces/nrtu-test-synape-2/bigDataPools/tmp",
+				"name": "tmp",
+				"type": "Spark",
+				"endpoint": "https://nrtu-test-synape-2.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/tmp",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net",
+					"authHeader": null
+				},
+				"sparkVersion": "3.1",
+				"nodeCount": 3,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"from pyspark.sql import SparkSession\r\n",
+					"from pyspark.sql.functions import col,lit\r\n",
+					"\r\n",
+					"'''\r\n",
+					"    spark token作成\r\n",
+					"'''\r\n",
+					"sc = SparkSession.builder.getOrCreate()\r\n",
+					"blob_sas_token = mssparkutils.credentials.getConnectionStringOrCreds('AzureBlobStorage1')\r\n",
+					"spark.conf.set('fs.azure.sas.%s.%s.blob.core.windows.net' % ('chl-container','di01dwh01trm0009'), blob_sas_token)\r\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": 5
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": false
+				},
+				"source": [
+					"# Azure Blob Storageからcsvファイルを取得\r\n",
+					"from_path = 'wasbs://%s@%s.blob.core.windows.net/%s' % ('chl-container','di01dwh01trm0009','testTypeData.csv')\r\n",
+					"csv_schema = \"_c0 string, Name string, ID string, boolCol string, dateCol string, timestampCol string, decimalCol string, doubleCol string, floatCol string, integerCol string, longCol string\"\r\n",
+					"sparkDf = spark.read.load(from_path, format='csv', header='true', schema=csv_schema) \r\n",
+					"\r\n",
+					"print('読み取り後：')\r\n",
+					"print(sparkDf.schema)\r\n",
+					"display(sparkDf)\r\n",
+					"\r\n",
+					"# Azure Blob Storageにcsvファイルを保存\r\n",
+					"sparkDf.write.format(\"json\")\\\r\n",
+					"    .option(\"path\", 'wasbs://%s@%s.blob.core.windows.net/%s' % ('chl-container','di01dwh01trm0009','testData_country_5'))\\\r\n",
+					"    .mode(\"overwrite\")\\\r\n",
+					"    .save()\r\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": 6
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": false
+				},
+				"source": [
+					"# Azure Blob Storageからjsonファイルを取得 schema\r\n",
+					"from_path = 'wasbs://%s@%s.blob.core.windows.net/%s' % ('chl-container','di01dwh01trm0009','testTypeData_3- 2.json')\r\n",
+					"csv_schema = \"_c0 string, Name string, ID string, boolCol boolean, dateCol date, timestampCol timestamp, decimalCol decimal, doubleCol double, floatCol float, integerCol integer, longCol long\"\r\n",
+					"sparkDf = spark.read.load(from_path, format='json', schema=csv_schema) \r\n",
+					"\r\n",
+					"print('読み取り後：')\r\n",
+					"sparkDf.printSchema()\r\n",
+					"display(sparkDf)\r\n",
+					"\r\n",
+					"\r\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": 8
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": false
+				},
+				"source": [
+					"from_path = 'wasbs://%s@%s.blob.core.windows.net/%s' % ('chl-container','di01dwh01trm0009','testTypeData_3.json')\r\n",
+					"csv_schema = \"_c0 int, Name string, ID string, boolCol boolean, dateCol date, timestampCol timestamp, decimalCol decimal, doubleCol double, floatCol float, integerCol integer, longCol long\"\r\n",
+					"sparkDf = spark.read.load(from_path, format='json', schema=csv_schema) \r\n",
+					"\r\n",
+					"print('読み取り後：')\r\n",
+					"sparkDf.printSchema()\r\n",
+					"display(sparkDf)\r\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": 11
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"import decimal\r\n",
+					"import time\r\n",
+					"import pandas as pd\r\n",
+					"import pyarrow as pa\r\n",
+					"import pyarrow.parquet as pq\r\n",
+					"\r\n",
+					"# Schemaを定義\r\n",
+					"schema = pa.schema([('id', pa.int32()),\\\r\n",
+					"                    ('email', pa.string()),\\\r\n",
+					"                    ('bl', pa.bool_()),\\\r\n",
+					"                    ('decimal128', pa.decimal128(10,5)),\\\r\n",
+					"                    ('date64', pa.date64())])\r\n",
+					"\r\n",
+					"# データ\r\n",
+					"ids = pa.array([1, 2], type=pa.int32())\r\n",
+					"emails = pa.array(['first@example.com', 'second@example.com'], pa.string())\r\n",
+					"bls = pa.array([True, False], pa.bool_())\r\n",
+					"decimal128s = pa.array([decimal.Decimal('1.1'), decimal.Decimal('2.2')], pa.decimal128(10,5))\r\n",
+					"date64s = pa.array([time.time(), time.time()], pa.date64())\r\n",
+					"\r\n",
+					"# Parquet 作成\r\n",
+					"batch = pa.RecordBatch.from_arrays([ids, emails, bls, decimal128s, date64s], schema=schema)\r\n",
+					"table_Parquet = pa.Table.from_batches([batch])\r\n",
+					"\r\n",
+					"# Parquet write\r\n",
+					"pq.write_table(table, 'plain.parquet')\r\n",
+					"\r\n",
+					"# Parquet write\r\n",
+					"schema = pq.read_schema('plain.parquet')\r\n",
+					"print(schema)\r\n",
+					"\r\n",
+					"df = pd.read_parquet('plain.parquet')\r\n",
+					"display(df)\r\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"from_path = 'wasbs://%s@%s.blob.core.windows.net/%s' % ('chl-container','di01dwh01trm0009','plain.parquet')\r\n",
+					"sparkDf = spark.read.load(from_path, format='parquet') \r\n",
+					"\r\n",
+					"print('読み取り後：')\r\n",
+					"sparkDf.printSchema()\r\n",
+					"display(sparkDf)\r\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": 3
+			}
+		]
+	}
+}

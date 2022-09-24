@@ -1,0 +1,112 @@
+{
+	"name": "Notebook 7",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "tmp",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"runAsWorkspaceSystemIdentity": false,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "3a0e9eef-a22a-43a3-85c5-5d48264ff4f8"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/ad1ca85f-99fd-4bfc-838b-9466bfcbebee/resourceGroups/NRTU_TEST/providers/Microsoft.Synapse/workspaces/nrtu-test-synape-2/bigDataPools/tmp",
+				"name": "tmp",
+				"type": "Spark",
+				"endpoint": "https://nrtu-test-synape-2.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/tmp",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net",
+					"authHeader": null
+				},
+				"sparkVersion": "3.1",
+				"nodeCount": 3,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"from_container = \"filefrom\"\r\n",
+					"from_account = \"12345nrtutest\"\r\n",
+					"filename = \"temp.csv\"\r\n",
+					"\r\n",
+					"table_name = 'temp'"
+				],
+				"attachments": null,
+				"execution_count": 76
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"microsoft": {
+						"language": "python"
+					}
+				},
+				"source": [
+					"%%pyspark\r\n",
+					"\r\n",
+					"account_name = from_account\r\n",
+					"container_name = from_container\r\n",
+					"adls_path = 'abfss://%s@%s.dfs.core.windows.net/' % (container_name, account_name)\r\n",
+					"from_path = adls_path + filename\r\n",
+					"\r\n",
+					"df = spark.read.load(from_path, format='csv',header='true')\r\n",
+					"\r\n",
+					"df.show()\r\n",
+					"\r\n",
+					"#df.write.mode('overwrite').save('12345nrtutest/fileto/temp20220926001.csv')\r\n",
+					"df.write.mode('overwrite').format('jdbc').options(url='com.sqlserver.jdbc.Driver',driver='jdbc:sqlserver://nrtutest.database.windows.net:1433',\r\n",
+					"    user='nrtuuser',password='linkage@12345',dbtable='temp')\r\n",
+					"\r\n",
+					"# df.write.jdbc('jdbc:sqlserver://nrtutest.database.windows.net:1433;user=nrtuuser;password=linkage@12345;'\r\n",
+					"# ,table_name, mode='overwrite')\r\n",
+					"# df.write.mode('overwrite').saveAsTable('temp')\r\n",
+					"#df.write.jdbc('jdbc:sqlserver://nrtutest.database.windows.net:1433;user=nrtuuser;password=linkage@12345;'\r\n",
+					"#,table_name, mode='overwrite')\r\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": 78
+			}
+		]
+	}
+}

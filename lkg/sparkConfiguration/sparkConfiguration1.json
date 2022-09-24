@@ -1,0 +1,20 @@
+{
+	"name": "sparkConfiguration1",
+	"properties": {
+		"configs": {
+			"spark.synapse.logAnalytics.enabled": "true",
+			"spark.synapse.logAnalytics.workspaceId": "e816077b-1c30-414d-a2b5-ee4437b40735",
+			"spark.synapse.logAnalytics.secret": "kcS4A0ABs8m9LJ8TFfuHSdB/OGfUK6TMo72Nc7zUXuOMtFN9uc47RgqDYIMfKqTadQqHNlotcVsv3hnAwxd0QA==",
+			"spark.sql.session.timeZone": "Asia/Tokyo"
+		},
+		"created": "2022-08-24T02:01:12.609Z",
+		"createdBy": "xiah@zhuyubinlinkstec.onmicrosoft.com",
+		"annotations": [],
+		"configMergeRule": {
+			"artifact.currentOperation.spark.synapse.logAnalytics.enabled": "replace",
+			"artifact.currentOperation.spark.synapse.logAnalytics.workspaceId": "replace",
+			"artifact.currentOperation.spark.synapse.logAnalytics.secret": "replace",
+			"artifact.currentOperation.spark.sql.session.timeZone": "replace"
+		}
+	}
+}
